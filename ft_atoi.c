@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchouina <cchouina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:32:44 by acouture          #+#    #+#             */
-/*   Updated: 2022/12/10 09:39:40 by acouture         ###   ########.fr       */
+/*   Updated: 2022/12/10 12:27:34 by cchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,4 @@ int ft_atoi(char *str)
     }
     return (result);
 }
+
