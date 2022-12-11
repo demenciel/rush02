@@ -2,11 +2,63 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "ft_atoi.c"
-int check_pos(int nb)
+#include "print_functions.c"
+
+int ft_atoi(char *str)
+{
+    int i;
+    int result;
+
+    i = 0;
+    result = 0;
+
+    while (str[i] >= 48 && str[i] <= 57)
+    {
+        result = result * 10 + str[i] - '0';
+		i++;
+    }
+    return (result);
+}
+
+int check_pos(int len)
+{
+    int pos = 0;
+    while (len > 1)
+    {
+        len--;
+        pos++;
+        if (pos == 3)
+            pos = 0;    
+        printf("Len: %d, Pos: %d \n", len, pos);
+    }
+    return(pos);
+}
+
+
+int check_tens(int len)
+{
+    int tens = 0;
+    int i = 0;
+    while (len > 1)
+    {
+        len--;
+        i++;
+        if (i == 3)
+        {
+            tens++;
+            i = 0;
+        }
+    }
+    return(tens);
+}
+
+int total_pos_check(int nb)
 {
     int i; 
     i = 0; 
+
+        if (nb == 0)
+        return(1);
 
     while (nb != 0)
     {
@@ -17,85 +69,77 @@ int check_pos(int nb)
 }
 
 
-int check_tens(int nb)
-{
-    int i; 
-    i = 0; 
-
-    while (nb != 0)
-    {
-        nb = nb / 10;
-        i++;
-    }
-    return(i % 3 + i / 3);
-}
-
-void print_hundreds()
-{
-    int file; 
-    int i;
-    i = 0;
-    char *c;
-    c = (char*)malloc(1024);
-    file = open("Header/numbers.dict", O_RDWR | O_CREAT);
-    size_t rd = read(file, c, 1024);
-    while (c[i] != '\0')
-    {
-        if(c[i] == 49 && c[i + 1] == 48 && c[i + 2] == 48)
-        {
-            while (c[i] != '\n')
-            {
-                if ((c[i] >= 65 && c[i] <= 90) || (c[i] >= 97 && c[i] <= 122))
-                    printf("%c", c[i]);
-                i++;
-            }
-        }
-        i++;
-    }
-    
-    close(file);
-}
-
 void print(char *ch, int pos)
 {       
-    int file; 
-    int i;
-    i = 0;
-    char *c;
-    c = (char*)malloc(1024);
-    file = open("Header/numbers.dict", O_RDWR | O_CREAT);
-    size_t rd = read(file, c, 1024); 
-    if (pos == 2)
-    {
-        while (c[i] != ch[0])
-            i++;
-        while (ch[i] == 32 || ch[i] == 58)
-            i++;
-        while (c[i] != '\n')
-        {
-            if ((c[i] >= 65 && c[i] <= 90) || (c[i] >= 97 && c[i] <= 122))
-                printf("%c", c[i]);
-            i++;
-        }
-        print_hundreds();
-
-    }
-  
-    close(file);
+    if (pos == 0)
+        print_units(&ch[0]);
+    else if (pos == 1)
+        print_tens(&ch[0]);
+    else if (pos == 2)
+        print_hundreds(&ch[0]);
 }
 
 int main(int argc, char *argv[])
 { 
     int pos;
+    int i;
     pos = 2;
-    int nb = ft_atoi(argv[1]);
-    int times = check_tens(nb);
+    char *value;
 
-    while (pos >= 0)
+    value = argv[1];
+    int nb = ft_atoi(value);
+
+    int total_pos = total_pos_check(nb);
+    pos = check_pos(total_pos);
+    int tens = check_tens(total_pos);
+
+    if (total_pos <= 3)
     {
-        print(&argv[1][pos], pos);
-        pos--;
+        tens = 0;
+
     }
-    
-    //printf("%s", c);
-}   
+
+    i = 0;
+
+    while (i < total_pos)
+    {
+        if (argv[1][i] == 49 && pos == 1)
+        {
+            print_tens_one(&argv[1][i], &argv[1][i+1]);
+            i += 2;
+            pos -=2;
+        } 
+        else if (argv[1][i] == 48 && total_pos != 1)
+        {
+            i++;
+            pos--;
+        }
+        else
+        {
+            print(&argv[1][i], pos);
+            i++;
+            pos--;
+        }
+
+
+        if(pos < 0)
+        {           
+            if (tens >= 1)
+            {
+                if (total_pos > 6)
+                {
+                    if (!(argv[1][i - 2] == 48 && argv[1][i - 1] == 48 && argv[1][i] == 48))
+                                    print_thousands(tens);
+                } else { 
+                        print_thousands(tens);
+
+                }
+             
+                tens--;
+            }
+
+            pos = 2;
+        }
+    }
+    //printfkd
+} 
