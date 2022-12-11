@@ -76,9 +76,7 @@ int	total_pos_check(char *nb)
 
 	i = 0;
 	while (nb[i] != '\0')
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -137,6 +135,8 @@ void	print_number(int total_pos, char *argv, int pos, int tens)
 			}
 			pos = 2;
 		}
+		if (i != total_pos)
+			write(1, " ", 1);
 	}
 }
 
