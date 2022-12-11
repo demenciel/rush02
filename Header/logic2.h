@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   logic2.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchouina <cchouina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:22:59 by acouture          #+#    #+#             */
-/*   Updated: 2022/12/11 17:24:09 by acouture         ###   ########.fr       */
+/*   Updated: 2022/12/11 17:36:50 by cchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,16 @@ int	reset_pos(int pos)
 	if (pos < 0)
 		pos = 2;
 	return (pos);
+}
+
+int write_thous(char *c, int i)
+{
+		while (c[i] != '\n')
+		{
+			if (c[i] >= 97 && c[i] <= 122)
+				write(1, &c[i], 1);
+			i++;
+		}
+		return(i);
 }
 #endif

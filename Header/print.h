@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchouina <cchouina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:23:03 by acouture          #+#    #+#             */
-/*   Updated: 2022/12/11 17:24:07 by acouture         ###   ########.fr       */
+/*   Updated: 2022/12/11 17:46:09 by cchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+char	*open_file(char *c);
+int write_thous(char *c, int i);
 
 void	print_hundreds(char *nb)
 {
@@ -128,36 +131,28 @@ int	print_tens_one(char *nb, char *nb2, int external_count)
 void	print_thousands(int tens)
 {
 	int		i;
-	int		base;
 	char	*c;
 
 	c = (char *)malloc(691);
 	open_file(c);
 	i = 0;
-	base = 1;
 	while (c[i] != '\0')
 	{
 		write(1, " ", 1);
 		while (!(c[i] == 49 && c[i + 1] == 48 && c[i + 2] == 48 && c[i
 				+ 3] == 48))
 			i++;
-		while (base < tens)
+		while (tens > 1)
 		{
 			while (c[i] != '\n')
 				i++;
-			base++;
+			tens--;
 			i++;
 		}
 		while (c[i] == 32 || c[i] == 58 || c[i] == 48)
 			i++;
-		while (c[i] != '\n')
-		{
-			if (c[i] >= 97 && c[i] <= 122)
-				write(1, &c[i], 1);
-			i++;
-		}
+		i = write_thous(c, i);
 		break ;
-		i++;
 	}
 	free(c);
 }
