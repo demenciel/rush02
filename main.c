@@ -1,3 +1,7 @@
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include "Header/print.h"
 #include "Header/logic.h"
 #include "Header/file_management.h"
@@ -11,13 +15,16 @@ int	ft_atoi(char *str)
 	result = 0;
 	while (str[i] != '\0')
 	{
+
 		if (!(str[i] >= 48 && str[i] <= 57))
 			return (-1);
+		if (result >= 4294967295 || (str[i] != '\0' && (result > (result * 10 + str[i] - '0'))))
+			return(-1);		
 		result = result * 10 + str[i] - '0';
+
 		i++;
+
 	}
-	if (result >= 4294967295)
-		return(-1);
 	return (result);
 }
 
@@ -41,7 +48,7 @@ int	main(int argc, char *argv[])
 	i = 0;
 	if (nb == -1)
 	{
-		print_error(0);
+		put_str("Error\n");
 		return (0);
 	}
 	print_number(total_pos, value, pos, tens);

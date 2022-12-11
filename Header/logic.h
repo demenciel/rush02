@@ -2,15 +2,18 @@
 #define LOGIC_H
 #include "print.h"
 #include "file_management.h"
+#include "logic2.h"
 
 
 void	print_hundreds(char *nb);
 void	print_tens(char *nb);
 void	print_units(char *nb);
-void	print_tens_one(char *nb, char *nb2);
+int		print_tens_one(char *nb, char *nb2, int external_count);
 void	print_thousands(int tens);
+int 	position_zero(int i, int tens, char *argv, int total_pos);
+int reset_pos(int pos);
 
-void	select_print_function(char *ch, int pos)
+int	select_print_function(char *ch, int pos, int external_count)
 {
 	if (pos == 0)
 		print_units(&ch[0]);
@@ -18,6 +21,7 @@ void	select_print_function(char *ch, int pos)
 		print_tens(&ch[0]);
 	else if (pos == 2)
 		print_hundreds(&ch[0]);
+	return (external_count + 1);
 }
 
 void	print_number(int total_pos, char *argv, int pos, int tens)
@@ -27,14 +31,11 @@ void	print_number(int total_pos, char *argv, int pos, int tens)
 	i = 0;
 	while (i < total_pos)
 	{
-		//si notre chiffre a la position des disaines est 1;
 		if (argv[i] == 49 && pos == 1)
 		{
-			print_tens_one(&argv[i], &argv[i + 1]);
-			i += 2;
+			i = print_tens_one(&argv[i], &argv[i + 1], i);
 			pos -= 2;
 		}
-		//si notre chiffre est 0 mais que le chiffre passe en argument n'est pas seulement 0;
 		else if (argv[i] == 48 && total_pos != 1)
 		{
 			i++;
@@ -42,31 +43,13 @@ void	print_number(int total_pos, char *argv, int pos, int tens)
 		}
 		else
 		{
-			select_print_function(&argv[i], pos);
-			i++;
+			i = select_print_function(&argv[i], pos, i);
 			pos--;
 		}
-		//si notre chiffre est 0 mais que le chiffre passe en argument n'est pas seulement 0;
 		if (pos < 0)
-		{
-			if (tens >= 1)
-			{
-				if (total_pos > 6)
-				{
-					if (!(argv[i - 1] == 48 && argv[i - 2] == 48 && argv[i
-							- 3] == 48))
-						print_thousands(tens);
-				}
-				else
-				{
-					print_thousands(tens);
-				}
-				tens--;
-			}
-			pos = 2;
-		}
-		if (i != total_pos)
-			write(1, " ", 1);
+			tens = position_zero(i, tens, argv, total_pos);
+		pos = reset_pos(pos);	
+		write_space(i, total_pos);
 	}
 }
 

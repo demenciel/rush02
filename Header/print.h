@@ -8,13 +8,6 @@
 #include "logic.h"
 #include "file_management.h"
 
-void	print_hundreds(char *nb);
-void	print_tens(char *nb);
-void	print_units(char *nb);
-void	print_tens_one(char *nb, char *nb2);
-void	print_thousands(int tens);
-
-
 void	print_hundreds(char *nb)
 {
 	int i;
@@ -93,7 +86,7 @@ void	print_units(char *nb)
 	free(c);
 }
 
-void	print_tens_one(char *nb, char *nb2)
+int	print_tens_one(char *nb, char *nb2, int external_count)
 {
 	int i;
 	i = 0;
@@ -116,6 +109,7 @@ void	print_tens_one(char *nb, char *nb2)
 		i++;
 	} 
 	free(c);
+	return(external_count + 2);
 }
 
 void	print_thousands(int tens)
