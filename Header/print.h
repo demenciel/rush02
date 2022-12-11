@@ -1,21 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/11 17:23:03 by acouture          #+#    #+#             */
+/*   Updated: 2022/12/11 17:24:07 by acouture         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PRINT_H
-#define PRINT_H
+# define PRINT_H
 
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "logic.h"
-#include "file_management.h"
+# include "file_management.h"
+# include "logic.h"
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 void	print_hundreds(char *nb)
 {
-	int i;
+	int		i;
+	char	*c;
+
 	i = 0;
-	char *c;
 	c = (char *)malloc(691);
 	open_file(c);
-
 	while (c[i] != '\0')
 	{
 		while (c[i] != nb[0])
@@ -37,12 +48,12 @@ void	print_hundreds(char *nb)
 
 void	print_tens(char *nb)
 {
-	int i;
+	int		i;
+	char	*c;
+
 	i = 0;
-	char *c;
 	c = (char *)malloc(691);
 	open_file(c);
-
 	while (c[i] != '\0')
 	{
 		while (!(c[i] == nb[0] && c[i + 1] == 48))
@@ -57,15 +68,16 @@ void	print_tens(char *nb)
 		}
 		break ;
 		i++;
-	} 
+	}
 	free(c);
 }
 
 void	print_units(char *nb)
 {
-	int i;
+	int		i;
+	char	*c;
+
 	i = 0;
-	char *c;
 	c = (char *)malloc(691);
 	open_file(c);
 	while (c[i] != '\0')
@@ -88,9 +100,10 @@ void	print_units(char *nb)
 
 int	print_tens_one(char *nb, char *nb2, int external_count)
 {
-	int i;
+	int		i;
+	char	*c;
+
 	i = 0;
-	char *c;
 	c = (char *)malloc(691);
 	open_file(c);
 	while (c[i] != '\0')
@@ -107,16 +120,17 @@ int	print_tens_one(char *nb, char *nb2, int external_count)
 		}
 		break ;
 		i++;
-	} 
+	}
 	free(c);
-	return(external_count + 2);
+	return (external_count + 2);
 }
 
 void	print_thousands(int tens)
 {
-	int i;
-	int base;
-	char *c;
+	int		i;
+	int		base;
+	char	*c;
+
 	c = (char *)malloc(691);
 	open_file(c);
 	i = 0;
@@ -124,11 +138,12 @@ void	print_thousands(int tens)
 	while (c[i] != '\0')
 	{
 		write(1, " ", 1);
-        while (!(c[i] == 49 && c[i + 1] == 48 && c[i + 2] == 48 && c[i + 3] == 48))
-            i++;
+		while (!(c[i] == 49 && c[i + 1] == 48 && c[i + 2] == 48 && c[i
+				+ 3] == 48))
+			i++;
 		while (base < tens)
 		{
-			while(c[i] != '\n')
+			while (c[i] != '\n')
 				i++;
 			base++;
 			i++;
@@ -141,11 +156,9 @@ void	print_thousands(int tens)
 				write(1, &c[i], 1);
 			i++;
 		}
-
-		
 		break ;
 		i++;
-	} 
+	}
 	free(c);
 }
 

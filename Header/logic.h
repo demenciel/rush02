@@ -1,17 +1,28 @@
-#ifndef LOGIC_H
-#define LOGIC_H
-#include "print.h"
-#include "file_management.h"
-#include "logic2.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   logic.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/11 17:22:50 by acouture          #+#    #+#             */
+/*   Updated: 2022/12/11 17:24:10 by acouture         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#ifndef LOGIC_H
+# define LOGIC_H
+# include "file_management.h"
+# include "logic2.h"
+# include "print.h"
 
 void	print_hundreds(char *nb);
 void	print_tens(char *nb);
 void	print_units(char *nb);
 int		print_tens_one(char *nb, char *nb2, int external_count);
 void	print_thousands(int tens);
-int 	position_zero(int i, int tens, char *argv, int total_pos);
-int reset_pos(int pos);
+int		position_zero(int i, int tens, char *argv, int total_pos);
+int		reset_pos(int pos);
 
 int	select_print_function(char *ch, int pos, int external_count)
 {
@@ -48,7 +59,7 @@ void	print_number(int total_pos, char *argv, int pos, int tens)
 		}
 		if (pos < 0)
 			tens = position_zero(i, tens, argv, total_pos);
-		pos = reset_pos(pos);	
+		pos = reset_pos(pos);
 		write_space(i, total_pos);
 	}
 }
