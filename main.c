@@ -1,7 +1,3 @@
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include "Header/print.h"
 #include "Header/logic.h"
 #include "Header/file_management.h"
