@@ -12,7 +12,7 @@ char *open_file(char *c)
 {	
 	int file;
 	file = open("Header/numbers.dict", O_RDWR | O_CREAT);
-	size_t rd = read(file, c, 1024);
+	size_t rd = read(file, c, 691);
 	return(c);
 	close(file);
 }
@@ -22,7 +22,7 @@ void	print_hundreds(char *nb)
 	int i;
 	i = 0;
 	char *c;
-	c = (char *)malloc(1024);
+	c = (char *)malloc(691);
 	open_file(c);
 
 	while (c[i] != '\0')
@@ -49,7 +49,7 @@ void	print_tens(char *nb)
 	int i;
 	i = 0;
 	char *c;
-	c = (char *)malloc(1024);
+	c = (char *)malloc(691);
 	open_file(c);
 
 	while (c[i] != '\0')
@@ -75,7 +75,7 @@ void	print_units(char *nb)
 	int i;
 	i = 0;
 	char *c;
-	c = (char *)malloc(1024);
+	c = (char *)malloc(691);
 	open_file(c);
 	while (c[i] != '\0')
 	{
@@ -100,7 +100,7 @@ void	print_tens_one(char *nb, char *nb2)
 	int i;
 	i = 0;
 	char *c;
-	c = (char *)malloc(1024);
+	c = (char *)malloc(691);
 	open_file(c);
 	while (c[i] != '\0')
 	{
@@ -125,7 +125,7 @@ void	print_thousands(int tens)
 	int i;
 	int base;
 	char *c;
-	c = (char *)malloc(1024);
+	c = (char *)malloc(691);
 	open_file(c);
 	i = 0;
 	base = 1;

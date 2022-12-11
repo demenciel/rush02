@@ -161,8 +161,9 @@ void	manage_dict(char *quote)
 	size_t	rd;
 
 	len = ft_strlen(quote);
-	c = (char *)malloc(1024);
+	c = (char *)malloc(sizeof(char*) * (692 + len));
 	file = open("Header/numbers.dict", O_WRONLY | O_APPEND);
+	write(file, "\n", 1);
 	write(file, quote, len);
 	close(file);
 	free(c);
