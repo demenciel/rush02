@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "print.h": "c",
+        "file_management.h": "c"
+    }
+}
