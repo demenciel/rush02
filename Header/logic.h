@@ -6,7 +6,7 @@
 /*   By: cchouina <cchouina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:22:50 by acouture          #+#    #+#             */
-/*   Updated: 2022/12/11 18:08:45 by cchouina         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:10:58 by cchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int		print_tens_one(char *nb, char *nb2, int external_count);
 void	print_thousands(int tens);
 int		position_zero(int i, int tens, char *argv, int total_pos);
 int		reset_pos(int pos);
-int check_file(void);
-
+int		check_file(void);
 
 int	select_print_function(char *ch, int pos, int external_count)
 {
@@ -40,7 +39,7 @@ int	select_print_function(char *ch, int pos, int external_count)
 void	print_number(int total_pos, char *argv, int pos, int tens)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < total_pos && check_file())
 	{

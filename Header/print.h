@@ -6,7 +6,7 @@
 /*   By: cchouina <cchouina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:23:03 by acouture          #+#    #+#             */
-/*   Updated: 2022/12/11 17:46:09 by cchouina         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:12:17 by cchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h>
 
 char	*open_file(char *c);
-int write_thous(char *c, int i);
+int		write_thous(char *c, int i);
 
 void	print_hundreds(char *nb)
 {
@@ -139,8 +139,8 @@ void	print_thousands(int tens)
 	while (c[i] != '\0')
 	{
 		write(1, " ", 1);
-		while (!(c[i] == 49 && c[i + 1] == 48 && c[i + 2] == 48 && c[i
-				+ 3] == 48))
+		while (!(c[i] == 49 && c[i + 1] == 48 && c[i + 2] == 48
+				&& c[i + 3] == 48))
 			i++;
 		while (tens > 1)
 		{

@@ -6,7 +6,7 @@
 /*   By: cchouina <cchouina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:18:32 by acouture          #+#    #+#             */
-/*   Updated: 2022/12/11 18:09:15 by cchouina         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:11:04 by cchouina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ int	main(int argc, char *argv[])
 	print_number(total_pos, value, pos, tens);
 	if (argc == 3)
 		manage_dict(argv[1]);
-	
 }
 ////////
